@@ -1,0 +1,48 @@
+
+.btn {
+	font-size: 1.5rem;
+	font-weight: 400;
+	text-decoration: none;
+	text-transform: capitalize;
+
+	height: 4rem;
+	min-width: 14rem;
+	padding: 0 1rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+.btn.btn-primary {
+	background: var(--dark-color);
+	color: var(--white-color);
+}
+
+.btn.bl-btn{
+	background: var(--dark-blue);
+	color: var(--white-color);
+}
+
+.btn-icon{
+
+}
+
+.btn-text{
+	margin-right: .5rem;
+}
+
+.menu-container{
+	padding-left: 2rem;
+}
+
+@media only screen and (max-width: 27.25rem) {
+	.btn {
+		font-size: 1.2rem;
+	}
+}
+

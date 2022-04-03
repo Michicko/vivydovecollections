@@ -1,0 +1,65 @@
+
+
+.primary-heading {
+	font-size: 3.5rem;
+	font-weight: 700;
+	text-transform: capitalize;
+	color: var(--dark-color);
+}
+.secondary-heading {
+	font-size: 2.5rem;
+	font-weight: 700;
+	text-transform: capitalize;
+	color: var(--dark-color);
+}
+
+.tertiary-heading {
+	font-size: 1.6rem;
+	font-weight: 700;
+	text-transform: capitalize;
+	color: var(--dark-color);
+}
+
+.filter_heading{
+	font-size: 1.3rem;
+		font-weight: 600;
+		color: var(--dark-color);
+		text-transform: uppercase;
+		margin-bottom: 2rem;
+}
+
+.lead {
+	font-size: 1.6rem;
+	font-weight: 400;
+	font-style: italic;
+	line-height: 1;
+	text-transform: capitalize;
+	color: var(--dark-color);
+}
+
+.para{
+font-size: 1.4rem;
+			font-weight: 400;
+			color: var(--dark-color);
+}
+
+@media only screen and (max-width: 43.75rem) {
+	.lead {
+		font-size: 1.3rem;
+	}
+
+	.primary-heading {
+		font-size: 2.5rem;
+	}
+
+	.secondary-heading {
+		font-size: 1.8rem;
+	}
+
+	.tertiary-heading {
+		font-size: 1.4rem;
+	}
+
+	.filter_heading{
+	font-size: 1.2rem;}
+}

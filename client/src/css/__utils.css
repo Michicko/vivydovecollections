@@ -1,0 +1,115 @@
+
+.hr-fl-list{
+display: flex;
+align-items: center;
+list-style: none;
+}
+
+.open-filters {
+	width: 25rem !important;
+	overflow: visible !important;
+}
+
+.hide-overflow {
+	overflow: hidden;
+}
+
+.show-overflow {
+	overflow: visible !important;
+}
+
+.panel-menu.show {
+	display: flex;
+}
+
+#portal {
+	position: fixed;
+	z-index: 999;
+	top: 4rem;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.alert{
+	width: 80%;
+	padding: 0 4rem;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.success {
+	width: 100%;
+	text-align: center;
+	color: var(--dark-green);
+	font-size: 1.4rem;
+	font-weight: 400;
+	position: relative;
+}
+
+.error {
+		width: 100%;
+		text-align: center;
+	color: var(--dark-red);
+	font-size: 1.4rem;
+	font-weight: 400;
+	position: relative;
+}
+
+.title-box {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.title-box > *:first-child {
+	margin-bottom: 0.5rem;
+}
+
+.social-link {
+	color: var(--dark-color);
+}
+
+.social-icon {
+	height: 2.2rem;
+	width: 2.2rem;
+}
+
+.social-icon:hover {
+	color: var(--primary-color);
+}
+
+.naira {
+		display: block;
+		margin-right: 0.2rem;
+		color: var(--dark-color);
+}
+
+.naira.sm{
+	font-size: 1.1rem;
+}
+
+.naira.bg{
+	font-size: 1.6rem;
+}
+
+
+.header-box{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+}
+
+.header-box.with-b{
+	margin-bottom: 2rem;
+}
+
+.header-box-b{
+	width: 100%;
+		display: flex;
+		justify-content: flex-end;
+}

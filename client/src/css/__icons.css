@@ -1,0 +1,13 @@
+.icon {
+	height: 2rem;
+	width: 2rem;
+}
+
+.icon.big{
+	height: 2.5rem;
+	width: 2.5rem;
+}
+
+.icon.dark-icon {
+	color: var(--dark-color);
+}

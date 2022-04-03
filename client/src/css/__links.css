@@ -1,0 +1,26 @@
+
+
+.link{
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.link.big-link{
+color: var(--dark-color);
+font-size: 1.6rem;
+text-transform: uppercase;
+}
+
+.link.sm-link{
+font-size: 1.4rem;
+	color: var(--dark-color);
+}
+
+.link.sm-link:hover {
+	color: var(--primary-color);
+}
+
+.link.big-link.active, 
+.link.big-link:hover{
+  font-weight: 600;
+}
