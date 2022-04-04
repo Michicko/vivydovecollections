@@ -1,23 +1,44 @@
 import styled from "styled-components";
 import { useProductsContext } from "../../../contexts/product_context";
 import { BiCheck } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useCartContext } from "../../../contexts/cart_context";
 
 const ProductInfoBox = ({ product }) => {
 
   const {
     product_options,
 		setSelectedItem,
+		clear_selected_item,
 		selected_size,
 		selected_color,
   } = useProductsContext();
 
+	const {add_to_cart} = useCartContext();
+
   const [mainMaterials, setMainMaterials] = useState([]);
 	const [colors, setColors] = useState([]);
 	const [sizes, setSizes] = useState([]);
+	const [productOption, setProductOption] = useState(null);
+	const [amount, setAmount] = useState(1);
+
+	useEffect(() => {
+		const getId = () => {
+			const product_option = product_options.find((prod) => prod.color === selected_color && prod.size.footSize === selected_size);
+			setProductOption(product_option);
+		}
+
+		getId();
+	}, [selected_color, selected_size, product_options])
+
+
+	const addClear = (product, amount,productOption) => {
+		add_to_cart(product,amount, productOption);
+		clear_selected_item();
+	}
 
   useEffect(() => {
-
 
     // refactor code
     if (product_options.length > 0) {
@@ -25,6 +46,7 @@ const ProductInfoBox = ({ product }) => {
 				...new Set(product_options.map((opt) => opt.mainMaterial)),
 			];
 			const colors = [...new Set(product_options.map((prod) => prod.color))];
+
 			const sizes = [
 				...new Set(product_options.map((prod) => prod.size.footSize))
 			];
@@ -116,9 +138,9 @@ const ProductInfoBox = ({ product }) => {
 				</p>
 			</div>
 			<div className='btn-box'>
-				<button className='cart-btn btn' type='button'>
-					Add to cart
-				</button>
+				<Link className='cart-btn btn' to='/cart' onClick={() => addClear(product, amount, productOption)}>
+					add to cart
+				</Link>
 			</div>
 		</Styles>
 	);

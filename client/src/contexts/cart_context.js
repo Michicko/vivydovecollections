@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 import reducer from '../reducers/cart_reducer';
+import { ADD_TO_CART } from '../Actions';
 
 
 const initialState = {
@@ -14,9 +15,16 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <CartContext.Provider value={{...state}}>
-    {children}
-  </CartContext.Provider>
+  // add to cart
+  const add_to_cart = (product,amount, productOption) => {
+    dispatch({ type: ADD_TO_CART, payload: { product, amount,productOption } });
+  }
+
+  return (
+		<CartContext.Provider value={{ ...state, add_to_cart }}>
+			{children}
+		</CartContext.Provider>
+	);
 }
 
 export const useCartContext = () => {

@@ -6,6 +6,7 @@ const {
 	GET_SINGLE_PRODUCT_SUCCESS,
 	GET_SINGLE_PRODUCT_ERROR,
 	SET_SELECTED_ITEM,
+	CLEAR_SELECTED_ITEM,
 	SET_PRODUCT_FORM_DATA,
 	ADD_NEW_PRODUCT,
 	CLEAR_FORM_DATA,
@@ -95,6 +96,10 @@ const ProductsReducer = (state, action) => {
 		}
 
 		return { ...state, selected_size, selected_color };
+	}
+
+	if (action.type === CLEAR_SELECTED_ITEM) {
+		return { ...state, selected_size: '', selected_color: '' };
 	}
 
 	if (action.type === SET_PRODUCT_FORM_DATA) {

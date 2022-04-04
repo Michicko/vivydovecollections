@@ -12,6 +12,7 @@ import {
 	GET_SINGLE_PRODUCT_ERROR,
 	GET_SINGLE_PRODUCT_SUCCESS,
 	SET_SELECTED_ITEM,
+	CLEAR_SELECTED_ITEM,
 	SET_PRODUCT_FORM_DATA,
 	ADD_NEW_PRODUCT,
 	CLEAR_FORM_DATA,
@@ -26,7 +27,7 @@ import {
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import reducer from "../reducers/product_reducer";
 import axios from "axios";
-// import singleProduct from "../utils/shit";
+
 
 const initialState = {
 	products_loading: false,
@@ -106,6 +107,10 @@ export const ProductsProvider = ({ children }) => {
 
 		dispatch({ type: SET_SELECTED_ITEM, payload: { name, value, index } });
 	};
+
+	const clear_selected_item = () => {
+		dispatch({ type: CLEAR_SELECTED_ITEM });
+}
 
 	const set_product_form_data = (e) => {
 		const name = e.target.name;
@@ -217,6 +222,7 @@ export const ProductsProvider = ({ children }) => {
 				editing,
 				creating,
 				setEditProductOption,
+				clear_selected_item,
 			}}
 		>
 			{children}
