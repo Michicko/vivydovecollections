@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useCallback, useContext, useEffect, useReducer } from "react";
 import {
 	OPEN_PANEL_MENU,
 	CLOSE_PANEL_MENU,
@@ -50,7 +50,7 @@ export const PageProvider = ({ children }) => {
 	};
 
 	// set mobile and desktop
-	const setMobile = () => {
+	const setMobile = useCallback(() => {
 		const windowWidth = window.innerWidth || document.clientWidth;
 
 		if (windowWidth <= 760 && !state.isMobile) {
@@ -60,7 +60,11 @@ export const PageProvider = ({ children }) => {
 		} else if (windowWidth > 960) {
 			dispatch({ type: CLOSE_MOBILE_FILTERS });
 		}
-	};
+	},[state.isMobile]);
+
+	useEffect(() => {
+		setMobile();
+	}, [setMobile]);
 
 	// open mobile filters for products page
 	const openMobileFilters = () => {
