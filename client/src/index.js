@@ -8,19 +8,22 @@ import { FilterProvider } from "./contexts/filter_contex";
 import { BlogsProvider } from "./contexts/blog_context";
 import { UserProvider } from "./contexts/user_context";
 import { OrdersProvider } from "./contexts/order_context";
+import { CartProvider } from "./contexts/cart_context";
 
 ReactDOM.render(
 	<UserProvider>
 		<ProductsProvider>
-			<PageProvider>
-				<BlogsProvider>
-					<FilterProvider>
+			<BlogsProvider>
+				<FilterProvider>
+					<CartProvider>
 						<OrdersProvider>
-							<App />
+							<PageProvider>
+								<App />
+							</PageProvider>
 						</OrdersProvider>
-					</FilterProvider>
-				</BlogsProvider>
-			</PageProvider>
+					</CartProvider>
+				</FilterProvider>
+			</BlogsProvider>
 		</ProductsProvider>
 	</UserProvider>,
 	document.getElementById("root")
