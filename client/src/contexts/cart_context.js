@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 import reducer from '../reducers/cart_reducer';
-import { ADD_TO_CART } from '../Actions';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../Actions';
 
 
 const initialState = {
@@ -20,8 +20,13 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_CART, payload: { product, amount,productOption } });
   }
 
+  // remove from cart
+  const remove_from_cart = (productOptionId) => {
+    dispatch({ type: REMOVE_FROM_CART, payload: productOptionId });
+  };
+
   return (
-		<CartContext.Provider value={{ ...state, add_to_cart }}>
+		<CartContext.Provider value={{ ...state, add_to_cart, remove_from_cart }}>
 			{children}
 		</CartContext.Provider>
 	);

@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../Actions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../Actions";
 
 const CartReducer = (state, action) => {
 	if (action.type === ADD_TO_CART) {
@@ -39,6 +39,12 @@ const CartReducer = (state, action) => {
 			return { ...state, cart: [...state.cart, new_cart_item] };
 		}
 	}
+
+  if (action.type === REMOVE_FROM_CART) {
+    const { id } = action.payload;
+    const tempCart = state.cart.filter((item) => item._id !== id);
+    return {...state, cart: tempCart}
+  }
 
 	return `No matching action ${action.type}`;
 };

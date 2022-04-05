@@ -15,7 +15,7 @@ const ProductInfoBox = ({ product }) => {
 		selected_color,
   } = useProductsContext();
 
-	const {add_to_cart} = useCartContext();
+	const { add_to_cart} = useCartContext();
 
   const [mainMaterials, setMainMaterials] = useState([]);
 	const [colors, setColors] = useState([]);
