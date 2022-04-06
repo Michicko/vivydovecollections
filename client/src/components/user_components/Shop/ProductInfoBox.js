@@ -30,7 +30,7 @@ const ProductInfoBox = ({ product }) => {
 		}
 
 		getId();
-	}, [selected_color, selected_size, product_options])
+	}, [selected_color, selected_size, product_options]);
 
 
 	const addClear = (product, amount,productOption) => {
