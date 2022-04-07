@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import HeaderTtitle from "../../components/typography/HeaderTitle";
 import CartContent from "../../components/user_components/Cart/CartContent";
 import UserTemplate from "../../components/user_components/User_Template";
 
@@ -9,7 +8,6 @@ const Cart = () => {
   return (
     <UserTemplate>
       <Styles>
-        <HeaderTtitle title="Shopping cart" type="big" />
         <div className="cart-content">
           <CartContent cartItems={cartItems}/>
         </div>

@@ -80,7 +80,7 @@ const Styles = styled.div`
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		width: 30rem;
+		width: 35rem;
 		margin-bottom: 2.5rem;
 
 		@media only screen and (max-width: 40rem) {

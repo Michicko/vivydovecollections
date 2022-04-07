@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const HeaderTtitle = ({title ,  type}) => {
-  if (type === "big") {
+const HeaderTtitle = ({ title, type }) => {
+	if (type === "big") {
 		return <BigTitle>{title}</BigTitle>;
 	}
 
@@ -10,9 +10,9 @@ const HeaderTtitle = ({title ,  type}) => {
 	}
 
 	return <h5>{title}</h5>;
-}
+};
 
- const BigTitle = styled.h2`
+const BigTitle = styled.h2`
 	font-size: 2.5rem;
 	font-weight: 600;
 	color: var(--dark-color);
