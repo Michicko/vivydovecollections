@@ -2,6 +2,7 @@ import styled from "styled-components";
 import HeaderTtitle from "../../components/typography/HeaderTitle";
 import CartContent from "../../components/user_components/Cart/CartContent";
 import UserTemplate from "../../components/user_components/User_Template";
+import CartFooter from "../../components/user_components/Cart/CartFooter";
 import cartItems from '../../utils/cartItems';
 
 const Cart = () => {
@@ -12,6 +13,7 @@ const Cart = () => {
         <div className="cart-content">
           <CartContent cartItems={cartItems}/>
         </div>
+        <CartFooter />
     </Styles>
   </UserTemplate> );
 }
@@ -32,6 +34,7 @@ const Styles = styled.div`
 	.cart-content {
 		width: 100%;
 		margin-top: 3rem;
+    margin-bottom: 4rem;
 	}
 `;
 export default Cart;
