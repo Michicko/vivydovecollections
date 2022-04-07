@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import CartContent from "../../components/user_components/Cart/CartContent";
 import UserTemplate from "../../components/user_components/User_Template";
-
-import cartItems from '../../utils/cartItems';
+import { useCartContext } from "../../contexts/cart_context";
 
 const Cart = () => {
+	const { cart: cartItems } = useCartContext();
+
   return (
     <UserTemplate>
       <Styles>

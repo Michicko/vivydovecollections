@@ -38,7 +38,7 @@ const Styles = styled.section`
 
 	ul {
 		list-style: none;
-		margin-bottom: 4rem;
+		margin: 4rem 0;
 
 		& > *:not(:last-child) {
 			margin-bottom: 2rem;

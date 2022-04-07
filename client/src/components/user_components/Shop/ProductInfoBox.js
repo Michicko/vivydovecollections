@@ -68,67 +68,80 @@ const ProductInfoBox = ({ product }) => {
 					<p className='red'>Out of stock</p>
 				)}
 			</div>
-			<div className='material-box'>
-				<h4>Main Material{mainMaterials.length > 1 ? "s" : ""}: </h4>
-				<div className='box'>
-					{mainMaterials.map((material, i) => {
-						return (
-							<span key={i} className='item'>
-								{material}
-								{i < mainMaterials.length - 1 ? ", " : ""}
-							</span>
-						);
-					})}
-				</div>
+			<div className={product.stock ? "material-box" : "material-box fl"}>
+				<h4>Main Material{mainMaterials.length > 1 ? "s" : ""}:</h4>
+				{product.stock ? (
+					<div className='box'>
+						{mainMaterials.map((material, i) => {
+							return (
+								<span key={i} className='item'>
+									{material}
+									{i < mainMaterials.length - 1 ? ", " : ""}
+								</span>
+							);
+						})}
+					</div>
+				) : (
+					<span className='un'>unavailable</span>
+				)}
 			</div>
 			<div className='price-box'>
+				<h4>Price: </h4>
 				<span className='naira bg'>&#8358;</span>
 				<h4 className='price'>{product.price}</h4>
 			</div>
-			<div className='colors-box'>
+			<div className={product.stock ? "colors-box" : "colors-box fl"}>
 				<h4>Color:</h4>
-				<div className='box'>
-					{colors.map((c, i) => {
-						return (
-							<button
-								className={
-									c === selected_color ? "color-btn active" : "color-btn"
-								}
-								type='button'
-								name='color'
-								data-color={c}
-								data-index={i}
-								style={{ background: c }}
-								key={i}
-								onClick={setSelectedItem}
-							>
-								{c === selected_color ? <BiCheck className='icon' /> : null}
-							</button>
-						);
-					})}
-				</div>
+				{product.stock ? (
+					<div className='box'>
+						{colors.map((c, i) => {
+							return (
+								<button
+									className={
+										c === selected_color ? "color-btn active" : "color-btn"
+									}
+									type='button'
+									name='color'
+									data-color={c}
+									data-index={i}
+									style={{ background: c }}
+									key={i}
+									onClick={setSelectedItem}
+								>
+									{c === selected_color ? <BiCheck className='icon' /> : null}
+								</button>
+							);
+						})}
+					</div>
+				) : (
+					<span className='un'>unavailable</span>
+				)}
 			</div>
-			<div className='size-box'>
+			<div className={product.stock ? "size-box" : "size-box fl"}>
 				<h4>Available Size:</h4>
-				<div className='box'>
-					{sizes.map((size, i) => {
-						return (
-							<button
-								className={
-									size === selected_size ? "size-btn active" : "size-btn"
-								}
-								type='button'
-								name='size'
-								data-size={size}
-								data-index={i}
-								key={i}
-								onClick={setSelectedItem}
-							>
-								{size}
-							</button>
-						);
-					})}
-				</div>
+				{product.stock ? (
+					<div className='box'>
+						{sizes.map((size, i) => {
+							return (
+								<button
+									className={
+										size === selected_size ? "size-btn active" : "size-btn"
+									}
+									type='button'
+									name='size'
+									data-size={size}
+									data-index={i}
+									key={i}
+									onClick={setSelectedItem}
+								>
+									{size}
+								</button>
+							);
+						})}
+					</div>
+				) : (
+					<span className='un'>unavailable</span>
+				)}
 			</div>
 			<div className='shipping-box'>
 				<h4>Delivery: </h4>
@@ -138,19 +151,28 @@ const ProductInfoBox = ({ product }) => {
 				</p>
 			</div>
 			<div className='btn-box'>
-				<Link className='cart-btn btn' to='/cart' onClick={() => addClear(product, amount, productOption)}>
-					add to cart
-				</Link>
+				{product.stock ? (
+					<Link
+						className='cart-btn btn'
+						to='/cart'
+						onClick={() => addClear(product, amount, productOption)}
+					>
+						add to cart
+					</Link>
+				) : (
+					<button className='disabled-btn btn' type='button'>
+						Out of stock
+					</button>
+				)}
 			</div>
 		</Styles>
 	);
 };
 
 const Styles = styled.div`
-  &>*:not(:last-child){
-    margin-bottom:1rem;
-  }
-
+	& > *:not(:last-child) {
+		margin-bottom: 1rem;
+	}
 
 	.colors-box .box,
 	.size-box .box {
@@ -160,6 +182,19 @@ const Styles = styled.div`
 
 		& > *:not(:last-child) {
 			margin-right: 1rem;
+		}
+	}
+
+	.colors-box.fl,
+	.size-box.fl, .material-box.fl {
+		display: flex;
+		align-items: center;
+
+		.un {
+			font-size: 1.3rem;
+			font-weight: 400;
+			color: var(--dark-color);
+			margin-left: 0.5rem;
 		}
 	}
 
@@ -225,10 +260,19 @@ const Styles = styled.div`
 			background: var(--dark-red);
 			color: var(--white-color);
 		}
+
+		.disabled-btn {
+			color: var(--dark-red);
+			/* background: var(--light-red); */
+		}
 	}
 	.price-box {
 		display: flex;
 		align-items: center;
+
+		span {
+			margin-left: 0.5rem;
+		}
 	}
 
 	.text-box {
