@@ -32,8 +32,8 @@ export const CartProvider = ({ children }) => {
 	};
 
 	// remove from cart
-	const remove_from_cart = (productOptionId) => {
-		dispatch({ type: REMOVE_FROM_CART, payload: productOptionId });
+	const remove_from_cart = (id) => {
+		dispatch({ type: REMOVE_FROM_CART, payload: id });
 	};
 
 	// persist to localstorage

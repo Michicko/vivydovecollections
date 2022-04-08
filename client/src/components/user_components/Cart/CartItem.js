@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { RiSubtractFill, RiAddFill, RiCloseFill } from "react-icons/ri";
+import { useCartContext } from "../../../contexts/cart_context";
 
 const CartItem = ({ item }) => {
-  const {name, image, price, color, footSize, heelHeight, amount, max } = item;
+  const {_id, name, image, price, color, footSize, heelHeight, amount, max } = item;
+
+	const {remove_from_cart} = useCartContext();
 
   return (
 		<Styles>
@@ -50,7 +53,11 @@ const CartItem = ({ item }) => {
 							</h4>
 						</div>
 					</div>
-					<button className='del-btn'>
+					<button
+						className='del-btn'
+						type='button'
+						onClick={() => remove_from_cart(_id)}
+					>
 						<RiCloseFill className='icon' />
 					</button>
 				</div>
