@@ -41,7 +41,7 @@ const CartReducer = (state, action) => {
 	}
 
   if (action.type === REMOVE_FROM_CART) {
-    const { id } = action.payload;
+		const id = action.payload;
     const tempCart = state.cart.filter((item) => item._id !== id);
     return {...state, cart: tempCart}
   }
