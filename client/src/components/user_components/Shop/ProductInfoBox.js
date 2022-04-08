@@ -6,18 +6,17 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "../../../contexts/cart_context";
 
 const ProductInfoBox = ({ product }) => {
-
-  const {
-    product_options,
+	const {
+		product_options,
 		setSelectedItem,
 		clear_selected_item,
 		selected_size,
 		selected_color,
-  } = useProductsContext();
+	} = useProductsContext();
 
-	const { add_to_cart} = useCartContext();
+	const { add_to_cart } = useCartContext();
 
-  const [mainMaterials, setMainMaterials] = useState([]);
+	const [mainMaterials, setMainMaterials] = useState([]);
 	const [colors, setColors] = useState([]);
 	const [sizes, setSizes] = useState([]);
 	const [productOption, setProductOption] = useState(null);
@@ -25,37 +24,38 @@ const ProductInfoBox = ({ product }) => {
 
 	useEffect(() => {
 		const getId = () => {
-			const product_option = product_options.find((prod) => prod.color === selected_color && prod.size.footSize === selected_size);
+			const product_option = product_options.find(
+				(prod) =>
+					prod.color === selected_color && prod.size.footSize === selected_size
+			);
 			setProductOption(product_option);
-		}
+		};
 
 		getId();
 	}, [selected_color, selected_size, product_options]);
 
-
-	const addClear = (product, amount,productOption) => {
-		add_to_cart(product,amount, productOption);
+	const addClear = (product, amount, productOption) => {
+		add_to_cart(product, amount, productOption);
 		clear_selected_item();
-	}
+	};
 
-  useEffect(() => {
-
-    // refactor code
-    if (product_options.length > 0) {
-      const mainMaterials = [
+	useEffect(() => {
+		// refactor code
+		if (product_options.length > 0) {
+			const mainMaterials = [
 				...new Set(product_options.map((opt) => opt.mainMaterial)),
 			];
 			const colors = [...new Set(product_options.map((prod) => prod.color))];
 
 			const sizes = [
-				...new Set(product_options.map((prod) => prod.size.footSize))
+				...new Set(product_options.map((prod) => prod.size.footSize)),
 			];
 
 			setMainMaterials(mainMaterials);
 			setColors(colors);
 			setSizes(sizes);
-    }
-  }, [product_options])
+		}
+	}, [product_options]);
 
 	return (
 		<Styles>
@@ -152,13 +152,22 @@ const ProductInfoBox = ({ product }) => {
 			</div>
 			<div className='btn-box'>
 				{product.stock ? (
-					<Link
-						className='cart-btn btn'
-						to='/cart'
-						onClick={() => addClear(product, amount, productOption)}
-					>
-						add to cart
-					</Link>
+					<div className='ca-btns'>
+						{selected_size || selected_color ? (
+							<Link
+								className='cart-btn btn'
+								to='/cart'
+								onClick={() => addClear(product, amount, productOption)}
+							>
+								add to cart
+							</Link>
+						) : (
+								// dummy add-to-cart incase nothing is selected
+							<button className='cart-btn btn' type='button'>
+								add to cart
+							</button>
+						)}
+					</div>
 				) : (
 					<button className='disabled-btn btn' type='button'>
 						Out of stock
@@ -186,7 +195,8 @@ const Styles = styled.div`
 	}
 
 	.colors-box.fl,
-	.size-box.fl, .material-box.fl {
+	.size-box.fl,
+	.material-box.fl {
 		display: flex;
 		align-items: center;
 
