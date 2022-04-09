@@ -1,4 +1,9 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../Actions";
+import {
+	ADD_TO_CART,
+	REMOVE_FROM_CART,
+	INCREASE_ITEM_AMOUNT,
+	DECREASE_ITEM_AMOUNT,
+} from "../Actions";
 
 const CartReducer = (state, action) => {
 	if (action.type === ADD_TO_CART) {
@@ -46,7 +51,45 @@ const CartReducer = (state, action) => {
     return {...state, cart: tempCart}
   }
 
-	return `No matching action ${action.type}`;
+	if (action.type === INCREASE_ITEM_AMOUNT) {
+		const id = action.payload;
+		const tempCart = state.cart.map((item) => {
+			if (item._id === id) {
+				const { amount, max } = item;
+				let tempAmount = amount + 1;
+				if (tempAmount > max) {
+					tempAmount = max;
+				}
+
+			return { ...item, amount: tempAmount };
+			} else {
+				return item;
+			}
+		})
+		
+		return { ...state, cart: tempCart };
+	}
+	
+	if (action.type === DECREASE_ITEM_AMOUNT) {
+		const id = action.payload;
+		const tempCart = state.cart.map((item) => {
+			if (item._id === id) {
+				const { amount} = item;
+				let tempAmount = amount - 1;
+				if (tempAmount < 1) {
+					tempAmount = 1;
+				}
+
+				return { ...item, amount: tempAmount };
+			} else {
+				return item;
+			}
+		});
+
+		return { ...state, cart: tempCart };
+	}
+
+		return `No matching action ${action.type}`;
 };
 
 export default CartReducer;

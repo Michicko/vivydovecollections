@@ -5,7 +5,7 @@ import { useCartContext } from "../../../contexts/cart_context";
 const CartItem = ({ item }) => {
   const {_id, name, image, price, color, footSize, heelHeight, amount, max } = item;
 
-	const {remove_from_cart} = useCartContext();
+	const {remove_from_cart, increase_item_amount, decrease_item_amount} = useCartContext();
 
   return (
 		<Styles>
@@ -38,11 +38,11 @@ const CartItem = ({ item }) => {
 					</div>
 					<div className='b'>
 						<div className='control'>
-							<button type='button' className='ctrl-btn dec'>
+							<button type='button' className='ctrl-btn dec' onClick={() => decrease_item_amount(_id)}>
 								<RiSubtractFill className='icon' />
 							</button>
 							<input type='number' className='amount' disabled value={amount} />
-							<button type='button' className='ctrl-btn inc'>
+							<button type='button' className='ctrl-btn inc' onClick={() => increase_item_amount(_id)}>
 								<RiAddFill className='icon' />
 							</button>
 						</div>
