@@ -9,5 +9,5 @@
 }
 
 .icon.dark-icon {
-	color: var(--dark-color);
+	color: var(--dark-color) !important;
 }
