@@ -63,6 +63,7 @@ const initialState = {
 	product_images: [],
 	selected_size: "",
 	selected_color: "",
+	selected_index: null,
 	featured_products: [],
 	instagramPics: [],
 	isCreatingProductOption: false,

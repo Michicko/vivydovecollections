@@ -49,9 +49,9 @@ const ProductsReducer = (state, action) => {
 		// const product = action.payload;
 		const product = action.payload;
 		const similar_products = state.products.filter(
-			(prod) => 
-				prod.category === product.category && prod.slug !== product.slug)
-			
+			(prod) => prod.category === product.category && prod.slug !== product.slug
+		);
+
 		const product_options = product.productOptions;
 		const product_images = [
 			product.image.url,
@@ -73,15 +73,19 @@ const ProductsReducer = (state, action) => {
 		return { ...state, single_product_loading: false, single_product_error };
 	}
 
+	// There's a bug here fix it
 	if (action.type === SET_SELECTED_ITEM) {
 		const { name, value, index } = action.payload;
 		const product_options = state.product_options;
+
 		let selected_color;
 		let selected_size;
+		const selected_index = index;
 
+		// it has to do with index
 		if (name === "color") {
 			selected_color = value;
-			const tempProduct = product_options.find(
+			const tempProduct = product_options.find( 
 				(prod, i) => prod.color === value && i === index
 			);
 			selected_size = tempProduct.size.footSize;
@@ -95,11 +99,11 @@ const ProductsReducer = (state, action) => {
 			selected_color = tempProduct.color;
 		}
 
-		return { ...state, selected_size, selected_color };
+		return { ...state, selected_size, selected_color, selected_index };
 	}
 
 	if (action.type === CLEAR_SELECTED_ITEM) {
-		return { ...state, selected_size: '', selected_color: '' };
+		return { ...state, selected_size: "", selected_color: "", selected_index:"" };
 	}
 
 	if (action.type === SET_PRODUCT_FORM_DATA) {
@@ -146,7 +150,7 @@ const ProductsReducer = (state, action) => {
 	}
 
 	if (action.type === SET_EDITING_PRODUCT) {
-		return {...state, isEditingProduct: true}
+		return { ...state, isEditingProduct: true };
 	}
 
 	if (action.type === SET_EDITING_PRODUCT_OPTION) {
@@ -187,7 +191,7 @@ const ProductsReducer = (state, action) => {
 	}
 
 	if (action.type === FETCH_PRODUCT_OPTIONS) {
-		return{...state, product_options:action.payload}
+		return { ...state, product_options: action.payload };
 	}
 
 	throw new Error(`No Matching ${action.type} action type`);

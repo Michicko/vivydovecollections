@@ -12,6 +12,7 @@ const ProductInfoBox = ({ product }) => {
 		clear_selected_item,
 		selected_size,
 		selected_color,
+		selected_index,
 	} = useProductsContext();
 
 	const { add_to_cart } = useCartContext();
@@ -21,6 +22,12 @@ const ProductInfoBox = ({ product }) => {
 	const [sizes, setSizes] = useState([]);
 	const [productOption, setProductOption] = useState(null);
 	const [amount, setAmount] = useState(1);
+
+	// clear selected items
+	useEffect(() => {
+		clear_selected_item();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		const getId = () => {
@@ -45,11 +52,9 @@ const ProductInfoBox = ({ product }) => {
 			const mainMaterials = [
 				...new Set(product_options.map((opt) => opt.mainMaterial)),
 			];
-			const colors = [...new Set(product_options.map((prod) => prod.color))];
+			const colors = product_options.map((prod) => prod.color);
 
-			const sizes = [
-				...new Set(product_options.map((prod) => prod.size.footSize)),
-			];
+			const sizes = product_options.map((prod) => prod.size.footSize);
 
 			setMainMaterials(mainMaterials);
 			setColors(colors);
@@ -98,7 +103,7 @@ const ProductInfoBox = ({ product }) => {
 							return (
 								<button
 									className={
-										c === selected_color ? "color-btn active" : "color-btn"
+										i === selected_index ? "color-btn active" : "color-btn"
 									}
 									type='button'
 									name='color'
@@ -108,7 +113,13 @@ const ProductInfoBox = ({ product }) => {
 									key={i}
 									onClick={setSelectedItem}
 								>
-									{c === selected_color ? <BiCheck className='icon' /> : null}
+									{c === selected_color ? (
+										<BiCheck
+											className={
+												selected_color === "white" ? "icon dark-icon" : "icon"
+											}
+										/>
+									) : null}
 								</button>
 							);
 						})}
@@ -118,14 +129,14 @@ const ProductInfoBox = ({ product }) => {
 				)}
 			</div>
 			<div className={product.stock ? "size-box" : "size-box fl"}>
-				<h4>Available Size:</h4>
+				<h4>Available Size{product_options.length > 1 ? `${'s'.toLowerCase()}` : ""}:</h4>
 				{product.stock ? (
 					<div className='box'>
 						{sizes.map((size, i) => {
 							return (
 								<button
 									className={
-										size === selected_size ? "size-btn active" : "size-btn"
+										i === selected_index ? "size-btn active" : "size-btn"
 									}
 									type='button'
 									name='size'
@@ -150,6 +161,13 @@ const ProductInfoBox = ({ product }) => {
 					1000.
 				</p>
 			</div>
+			<div className='shipping-box'>
+				<h4>NB: </h4>
+				<p>
+					When size is selected, it's color is selected automatically,
+					same goes for selected color.
+				</p>
+			</div>
 			<div className='btn-box'>
 				{product.stock ? (
 					<div className='ca-btns'>
@@ -162,7 +180,7 @@ const ProductInfoBox = ({ product }) => {
 								add to cart
 							</Link>
 						) : (
-								// dummy add-to-cart incase nothing is selected
+							// dummy add-to-cart incase nothing is selected
 							<button className='cart-btn btn' type='button'>
 								add to cart
 							</button>
